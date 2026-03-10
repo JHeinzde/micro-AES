@@ -9,6 +9,7 @@
  */
 
 #include "micro_aes.h"
+#include "cpuemu.h"
 
 /*----------------------------------------------------------------------------*\
                               Constants and MACROs

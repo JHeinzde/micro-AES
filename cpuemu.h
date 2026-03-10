@@ -1,10 +1,11 @@
 
 /* cpuemu.h -- Header file for C programs to run on the CPU emulator. */
-
+#pragma once
 #ifndef CPUEMU_H
 #define CPUEMU_H
 
 /* System call numbers. */
+//#include <cstring>
 #define _EMUNR_exit  -1
 #define _EMUNR_write -2
 #define _EMUNR_read  -3
@@ -121,4 +122,47 @@ static inline int read(void *__buffer, int __size) {
     return _R_result;
 }
 
+
+static inline void *memcpy(void *destination, const void *source, int num) {
+  char *s_t = (char *) source;
+  char *d_t = (char *) destination;
+
+  while (num-- > 0) {
+    d_t[num] = s_t[num];
+  }
+
+  return destination;
+}
+
+
+static inline int memcmp(const void *s1, const void *s2, int n) {
+  char *s_t = (char *)s1;
+  char *d_t = (char *)s2;
+
+  while (n-- > 0) {
+    if (s_t[n] != d_t[n]) 
+      return 1;
+  }
+
+  return 0;
+}
+
+
+static inline void memset(void *dest, char something, unsigned long times) {
+  char *d_t = (char*) dest; 
+
+  while (times-- > 0) {
+    d_t[times] = something;
+  }
+}
+
+
+static inline int strlen(char *string) {
+  int i = 0;
+  while (string[i] != '\0') {
+    i++;
+  }
+
+  return i;
+}
 #endif

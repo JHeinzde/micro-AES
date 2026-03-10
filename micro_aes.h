@@ -7,7 +7,6 @@
  Description : μAES ™ is a minimalist all-in-one library for AES encryption
  ==============================================================================
  */
-
 #ifndef MICRO_AES_H_
 #define MICRO_AES_H_
 
@@ -131,7 +130,7 @@ enum constant_parameters_of_modes
 /**----------------------------------------------------------------------------
 Since <stdint.h> is not a part of ANSI-C, we may need a 'trick' to use uint8_t
  -----------------------------------------------------------------------------*/
-#include <string.h>
+//#include <string.h>
 #include <limits.h>
 #ifdef  LLONG_MAX          /* which means compiler conforms to C99 standard.  */
 #include <stdint.h>
