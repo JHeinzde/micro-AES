@@ -2,7 +2,7 @@
 # Requires Clang 17+ (for XTHeadCmo)
 CLANG ?= clang
 SYSROOT ?= /usr/riscv64-elf/
-RISCV_CLANG ?= $(CLANG) --sysroot=$(SYSROOT) --target=riscv32 -march=rv32im_zicbom_xtheadcmo
+RISCV_CLANG ?= $(CLANG) --sysroot=$(SYSROOT) -mno-zbb --target=riscv32 -march=rv32im_zicbom_xtheadcmo
 CFLAGS ?= -fno-builtin -Os -Wall
 
 .PHONY: all clean
