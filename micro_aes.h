@@ -31,7 +31,7 @@ AES block-cipher modes of operation. The following modes can be enabled/disabled
 #define CTR          1     /* counter-block (NIST SP 800-38A)                 */
 #define XEX          1     /* xor-encrypt-xor (NIST SP 800-38E)               */
 #define KWA          1     /* key wrap with authentication (NIST SP 800-38F)  */
-#define FPE          1     /* format-preserving encryption (NIST SP 800-38G)  */
+#define FPE          0     /* format-preserving encryption (NIST SP 800-38G)  */
 #endif
 
 #if AEAD_MODES
