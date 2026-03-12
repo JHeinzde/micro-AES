@@ -38,10 +38,10 @@ static void check(const char* method, void* result, const void* expected, size_t
 
     write(method, strlen(method));
 
-    const char *successMessage = "AES test run successfully!";
-    const char *failureMessage = "AES test run failed!";
+    const char *successMessage = "AES test run successfully!\n";
+    const char *failureMessage = "AES test run failed!\n";
 
-    if (c) {
+    if (!c) {
       write(successMessage, strlen(successMessage));
     } else {
       write(failureMessage, strlen(failureMessage));
