@@ -1,11 +1,10 @@
 
 /* cpuemu.h -- Header file for C programs to run on the CPU emulator. */
-#pragma once
+
 #ifndef CPUEMU_H
 #define CPUEMU_H
 
 /* System call numbers. */
-//#include <cstring>
 #define _EMUNR_exit  -1
 #define _EMUNR_write -2
 #define _EMUNR_read  -3
@@ -84,6 +83,10 @@ static inline void flushall(void) {
     _EMU_SYSCALL(rv, no, "r"(a1))
 #define _EMU_SYSCALL2(rv, no, a1, a2)     \
     _EMU_SYSCALL(rv, no, "r"(a1), "r"(a2))
+#define _EMU_SYSCALL3(rv, no)             \
+    _EMU_SYSCALL(rv, no)
+#define _EMU_SYSCALL4(rv, no)             \
+    _EMU_SYSCALL(rv, no)
 
 
 /* System call wrappers. */
@@ -124,47 +127,20 @@ static inline int read(void *__buffer, int __size) {
     return _R_result;
 }
 
-
-static inline void *memcpy(void *destination, const void *source, int num) {
-  char *s_t = (char *) source;
-  char *d_t = (char *) destination;
-
-  while (num-- > 0) {
-    d_t[num] = s_t[num];
-  }
-
-  return destination;
+/* Start power trace capture. Should be called directly before any AES calcualtion takes place
+ *
+ * returns -- 1 If trace was started, 0 if no trace was started (because one capture is already running)
+ *
+*/
+static inline int trace_start() {
+  register int _R_result asm("a0");
+  _EMU_SYSCALL3(_R_result, _EMUNR_trace_start);
+  return _R_result;
 }
 
-
-static inline int memcmp(const void *s1, const void *s2, int n) {
-  char *s_t = (char *)s1;
-  char *d_t = (char *)s2;
-
-  while (n-- > 0) {
-    if (s_t[n] != d_t[n]) 
-      return 1;
-  }
-
-  return 0;
-}
-
-
-static inline void memset(void *dest, char something, unsigned long times) {
-  char *d_t = (char*) dest; 
-
-  while (times-- > 0) {
-    d_t[times] = something;
-  }
-}
-
-
-static inline int strlen(char *string) {
-  int i = 0;
-  while (string[i] != '\0') {
-    i++;
-  }
-
-  return i;
+static inline int trace_stop() {
+  register int _R_result asm("a0");
+  _EMU_SYSCALL4(_R_result, _EMUNR_trace_stop);
+  return _R_result;
 }
 #endif
